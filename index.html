@@ -25,16 +25,33 @@
 
   <footer class="footer">
     <p>© 2025 二分歌台 | 用音乐点亮心灵</p>
-    <p>本站访问次数：<span data-goatcounter-show="visits">加载中...</span></p>
+    <p>本站访问次数：<span id="visit-count">加载中...</span></p>
     <a href="#">返回顶部 ↑</a>
     <!-- 添加转到歌曲表1的按钮 -->
     <button id="redirect-button">转到歌曲表4</button>
   </footer>
 
-  <!-- GoatCounter 统计脚本 -->
-  <script data-goatcounter="https://songs-goat.goatcounter.com/count"
-          async src="https://gc.zgo.at/count.js"></script>
-   <script src="https://songs-goat.goatcounter.com/tag.js"></script>       
+ <!-- 设置 GoatCounter 统计路径 -->
+<script>
+  window.goatcounter = { path: "/SongsList3/" };
+</script>
+
+<!-- GoatCounter 脚本 -->
+<script data-goatcounter="https://songs-goat.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
+
+<!-- 访问次数显示逻辑 -->
+<script>
+  fetch("https://songs-goat.goatcounter.com/api/v0/stats?page=/SongsList3/")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("visit-count").innerText = data.count;
+    })
+    .catch(() => {
+      document.getElementById("visit-count").innerText = "获取失败";
+    });
+</script>
+   
 
   <!-- 跳转按钮脚本 -->
   <script>
